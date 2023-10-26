@@ -17,8 +17,10 @@ import facefusion.globals
 from facefusion import wording
 from facefusion.vision import detect_fps
 
-TEMP_DIRECTORY_PATH = os.path.join(tempfile.gettempdir(), 'facefusion')
+# TEMP_DIRECTORY_PATH = os.path.join(tempfile.gettempdir(), 'facefusion')
 TEMP_OUTPUT_VIDEO_NAME = 'temp.mp4'
+
+TEMP_DIRECTORY_PATH = os.path.join('./tmp', 'facefusion')
 
 # monkey patch ssl
 if platform.system().lower() == 'darwin':
@@ -28,8 +30,10 @@ if platform.system().lower() == 'darwin':
 def run_ffmpeg(args : List[str]) -> bool:
 	commands = [ 'ffmpeg', '-hide_banner', '-loglevel', 'error' ]
 	commands.extend(args)
+
+	print('图片增强命令：',commands)
 	try:
-		subprocess.run(commands, stderr = subprocess.PIPE, check = True)
+		subprocess.run(commands, stderr = subprocess.PIPE, check = True)  #subprocess 模块允许我们启动一个新进程，并连接到它们的输入/输出/错误管道，从而获取返回值。
 		return True
 	except subprocess.CalledProcessError:
 		return False
@@ -137,6 +141,8 @@ def create_temp(target_path : str) -> None:
 	temp_directory_path = get_temp_directory_path(target_path)
 	Path(temp_directory_path).mkdir(parents = True, exist_ok = True)
 
+	print('这路经：',temp_directory_path)
+
 
 def move_temp(target_path : str, output_path : str) -> None:
 	temp_output_video_path = get_temp_output_video_path(target_path)
@@ -153,6 +159,9 @@ def clear_temp(target_path : str) -> None:
 		shutil.rmtree(temp_directory_path)
 	if os.path.exists(parent_directory_path) and not os.listdir(parent_directory_path):
 		os.rmdir(parent_directory_path)
+
+	print('清除的路径1：',temp_directory_path)
+	print('清除的路径2：',parent_directory_path)
 
 
 def is_file(file_path : str) -> bool:

@@ -16,7 +16,7 @@ def get_face_analyser() -> Any:
 
 	with THREAD_LOCK:
 		if FACE_ANALYSER is None:
-			FACE_ANALYSER = insightface.app.FaceAnalysis(name = 'buffalo_l', providers = facefusion.globals.execution_providers)
+			FACE_ANALYSER = insightface.app.FaceAnalysis(name = 'buffalo_l', providers = facefusion.globals.execution_providers) #人脸检测器模型名称buffalo_l
 			FACE_ANALYSER.prepare(ctx_id = 0)
 	return FACE_ANALYSER
 

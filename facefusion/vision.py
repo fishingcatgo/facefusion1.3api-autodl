@@ -51,7 +51,7 @@ def resize_frame_dimension(frame : Frame, max_width : int, max_height : int) -> 
 
 
 @lru_cache(maxsize = 128)
-def read_static_image(image_path : str) -> Optional[Frame]:
+def read_static_image(image_path : str) -> Optional[Frame]:  #lru_cache将重复耗时的计算的中间结果保存下来
 	return read_image(image_path)
 
 

@@ -80,6 +80,14 @@ def cli() -> None:
 
 def apply_args(program : ArgumentParser) -> None:
 	args = program.parse_args()
+
+	print('类型argparser：', type(args))
+	print('参数：',args)
+	
+	dic = vars(args)
+	print('类型dict：', type(dic))
+	print('字典：',dic)
+
 	# general
 	facefusion.globals.source_path = args.source_path
 	facefusion.globals.target_path = args.target_path
@@ -210,15 +218,20 @@ def process_image() -> None:
 
 
 def process_video() -> None:
-	if predict_video(facefusion.globals.target_path):
+	if predict_video(facefusion.globals.target_path): #opennsfw2对图片/视频进行鉴黄识别
 		return
 	fps = detect_fps(facefusion.globals.target_path) if facefusion.globals.keep_fps else 25.0
 	# create temp
 	update_status(wording.get('creating_temp'))
 	create_temp(facefusion.globals.target_path)
+
+	
 	# extract frames
 	update_status(wording.get('extracting_frames_fps').format(fps = fps))
 	extract_frames(facefusion.globals.target_path, fps)
+
+	# quit('测试，创建帧路径')
+
 	# process frame
 	temp_frame_paths = get_temp_frame_paths(facefusion.globals.target_path)
 	if temp_frame_paths:
@@ -234,6 +247,8 @@ def process_video() -> None:
 	if not merge_video(facefusion.globals.target_path, fps):
 		update_status(wording.get('merging_video_failed'))
 		return
+	
+	# quit('测试，创建帧路径')
 	# handle audio
 	if facefusion.globals.skip_audio:
 		update_status(wording.get('skipping_audio'))

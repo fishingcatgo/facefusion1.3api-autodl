@@ -8,7 +8,7 @@ FACES_CACHE : Dict[str, List[Face]] = {}
 
 def get_faces_cache(frame : Frame) -> Optional[List[Face]]:
 	frame_hash = create_frame_hash(frame)
-	if frame_hash in FACES_CACHE:
+	if frame_hash in FACES_CACHE:  #帧已经处理过，直接拿对应的帧
 		return FACES_CACHE[frame_hash]
 	return None
 
