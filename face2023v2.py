@@ -40,14 +40,14 @@ if __name__ == '__main__':
             'keep_temp': False,
 
 
-            'output_image_quality': 80,
+            'output_image_quality': 100,
             'output_video_encoder': 'libx264',
-            'output_video_quality': 80,
+            'output_video_quality': 100,
             'keep_fps': False,
             'skip_audio': False,
 
 
-            'frame_processors': ['face_swapper','face_enhancer'], #参数修改API必须用2 ,'frame_enhancer'
+            'frame_processors': ['face_swapper','face_enhancer','frame_enhancer'], #参数修改API必须用2 ,'frame_enhancer'
             'face_enhancer_model': 'gfpgan_1.4',
             'face_enhancer_blend': 100,
             'face_swapper_model': 'inswapper_128',

@@ -111,7 +111,7 @@ def pre_process(mode : ProcessMode) -> bool:
 
 
 def post_process() -> None:
-	clear_frame_processor()
+	# clear_frame_processor()
 	clear_face_analyser()
 	read_static_image.cache_clear()
 

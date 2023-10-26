@@ -31,7 +31,7 @@ def run_ffmpeg(args : List[str]) -> bool:
 	commands = [ 'ffmpeg', '-hide_banner', '-loglevel', 'error' ]
 	commands.extend(args)
 
-	print('图片增强命令：',commands)
+	# print('图片增强命令：',commands)
 	try:
 		subprocess.run(commands, stderr = subprocess.PIPE, check = True)  #subprocess 模块允许我们启动一个新进程，并连接到它们的输入/输出/错误管道，从而获取返回值。
 		return True
@@ -160,8 +160,8 @@ def clear_temp(target_path : str) -> None:
 	if os.path.exists(parent_directory_path) and not os.listdir(parent_directory_path):
 		os.rmdir(parent_directory_path)
 
-	print('清除的路径1：',temp_directory_path)
-	print('清除的路径2：',parent_directory_path)
+	# print('清除的路径1：',temp_directory_path)
+	# print('清除的路径2：',parent_directory_path)
 
 
 def is_file(file_path : str) -> bool:
